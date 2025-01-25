@@ -23,13 +23,13 @@ class Usuario extends BaseController
     public function show($id)
     {
 
-        // if (!auth()->user() || !auth()->user()->can('users.detail')) {
-        //     return redirect()->to('/');
-        // }
-        
-        if (!auth()->user()->can('users.detail')) {
+        if (!auth()->user() || !auth()->user()->can('users.detail')) {
             return redirect()->to('/');
         }
+        
+        // if (!auth()->user()->can('users.detail')) {
+        //     return redirect()->to('/');
+        // }
 
         $authGroups = config('AuthGroups');
         $userModel = model('UserModel');
@@ -60,7 +60,9 @@ class Usuario extends BaseController
         //     var_dump($key);
         // }
 
-
+        // var_dump($authGroups->groups);
+        // var_dump($authGroups->matrix);
+        // return;
         echo view('dashboard/usuario/show', [
             'usuario' => $userModel->find($id),
             'groups' => $authGroups->groups,
@@ -72,10 +74,10 @@ class Usuario extends BaseController
     public function permisos_manejar($usuarioId)
     {
 
-        if (!auth()->user()->can('users.edit')) {
-            echo -2;
-            return;
-        }
+        // if (!auth()->user()->can('users.edit')) {
+        //     echo -2;
+        //     return;
+        // }
 
         $userModel = model('UserModel');
 
